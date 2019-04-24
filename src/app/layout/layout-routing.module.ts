@@ -25,9 +25,13 @@ const routes: Routes = [
                 loadChildren: './products/products.module#ProductsModule'
             },
             {
-                path: 'charts',
-                loadChildren: './charts/charts.module#ChartsModule'
+                path: 'user-accounts',
+                loadChildren: './user-accounts/user-accounts.module#UserAccountsModule'
             },
+            // {
+            //     path: 'charts',
+            //     loadChildren: './charts/charts.module#ChartsModule'
+            // },
             // {
             //     path: 'components',
             //     loadChildren:

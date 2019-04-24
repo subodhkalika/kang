@@ -4,6 +4,10 @@ table {
 .flex {
 	display: flex;
 }
+.flex-space {
+	justify-content: space-between;
+	align-items: center;
+}
 .flex-center {
 	justify-content: center;
 	align-items: center;

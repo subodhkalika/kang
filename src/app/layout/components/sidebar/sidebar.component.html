@@ -3,6 +3,9 @@
         <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/dashboard']">
             <mat-icon class="sidenav-icon">dashboard</mat-icon> {{ 'Dashboard' | translate }}
         </a>
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/user-accounts']">
+            <mat-icon class="sidenav-icon">face</mat-icon> {{ 'User Accounts' | translate }}
+        </a>
         <div class="nested-menu">
             <a mat-list-item (click)="addExpandClass('categories')">
                 <mat-icon class="sidenav-icon">category</mat-icon> {{ 'Categories' | translate }}
