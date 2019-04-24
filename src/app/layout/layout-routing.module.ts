@@ -28,6 +28,14 @@ const routes: Routes = [
                 path: 'user-accounts',
                 loadChildren: './user-accounts/user-accounts.module#UserAccountsModule'
             },
+            {
+                path: 'product-assignments',
+                loadChildren: './assignments/assignments.module#AssignmentsModule'
+            },
+            { 
+                path: '**',
+                redirectTo: 'dashboard'
+            },
             // {
             //     path: 'charts',
             //     loadChildren: './charts/charts.module#ChartsModule'
@@ -37,10 +45,10 @@ const routes: Routes = [
             //     loadChildren:
             //         './material-components/material-components.module#MaterialComponentsModule'
             // },
-            {
-                path: 'forms',
-                loadChildren: './forms/forms.module#FormsModule'
-            },
+            // {
+            //     path: 'forms',
+            //     loadChildren: './forms/forms.module#FormsModule'
+            // },
             // {
             //     path: 'grid',
             //     loadChildren: './grid/grid.module#GridModule'
@@ -53,6 +61,7 @@ const routes: Routes = [
             //     path: 'blank-page',
             //     loadChildren: './blank-page/blank-page.module#BlankPageModule'
             // }
+            // otherwise redirect to home
         ]
     }
 ];

@@ -32,9 +32,19 @@
                 </li>
             </ul>
         </div>
-        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/blank-page']">
-            <mat-icon class="sidenav-icon">input</mat-icon> {{ 'Assignment' | translate }}
-        </a>
+        <div class="nested-menu">
+            <a mat-list-item (click)="addExpandClass('assignment')">
+                <mat-icon class="sidenav-icon">input</mat-icon> {{ 'Assignment' | translate }}
+            </a>
+            <ul class="nested submenu" [class.expand]="showMenu === 'assignment'">
+                <li>
+                    <a [routerLinkActive]="'active'" [routerLink]="['/product-assignments']"><span>{{ 'View All' | translate }}</span></a>
+                </li>
+                <li>
+                    <a [routerLinkActive]="'active'" [routerLink]="['/product-assignments/assign']"><span>{{ 'Assign Product' | translate }}</span></a>
+                </li>
+            </ul>
+        </div>
         <div class="nested-menu">
             <a mat-list-item (click)="addExpandClass('timesheet')">
                 <mat-icon class="sidenav-icon">grid_on</mat-icon> {{ 'Timesheet' | translate }}

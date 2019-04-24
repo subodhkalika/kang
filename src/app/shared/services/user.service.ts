@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { MaxCategory } from '@app/_models/category';
 import { ParentCategories } from '@app/_models/category';
 import { Categories } from '@app/_models/category';
+import { User } from '@app/_models/user';
 
 @Injectable({
 	providedIn: 'root'
@@ -17,10 +18,15 @@ export class UserService {
 	}
 	
 	getAllUsers() {
-		return this.http.get<any>(`${environment.apiUrl}/api/users`);
+		return this.http.get<User>(`${environment.apiUrl}/api/users`);
 	}
 
 	updateUser(id, data) {
 		return this.http.put<any>(`${environment.apiUrl}/api/category-update/${id}`, data);
+	}
+
+	getAllDistributors() {
+		let user_roles = { roles: ['distribution']};
+		return this.http.get<User>(`${environment.apiUrl}/api/users`, { params: user_roles});
 	}
 }

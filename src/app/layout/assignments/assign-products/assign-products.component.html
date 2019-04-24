@@ -1,0 +1,38 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Assign Products</mat-card-title>
+  </mat-card-header>
+  <form 
+    [formGroup]="assignProductForm"
+    autocomplete="off"
+    novalidate 
+    (ngSubmit)="assignProduct(assignProductForm.value)"
+    fxLayout="column"
+    fxLayoutAlign="center stretch"
+    class="row"
+  >
+    <mat-card-content>
+      <mat-form-field >
+        <mat-select placeholder="Choose Distributor" formControlName="distributor_id">
+          <mat-option *ngFor="let distributor of distributors" [value]="distributor.id">
+            {{distributor.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Choose Product to Assign" formControlName="product_id">
+          <mat-option *ngFor="let product of products" [value]="product.id">
+            {{ product.id + ' - ' + product.product_name + ' - ' + product.product_lot }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="number" matInput placeholder="Quantity" formControlName="quantity" autocomplete="off">
+      </mat-form-field>
+      <mat-form-field>
+        <input type="number" matInput placeholder="Unit Price" formControlName="unit_price" autocomplete="off">
+      </mat-form-field>
+    </mat-card-content>
+    <button mat-raised-button color="primary" [disabled]="!assignProductForm.valid">Assign</button>
+  </form>
+</mat-card>
