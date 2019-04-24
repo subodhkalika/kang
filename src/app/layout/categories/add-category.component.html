@@ -1,0 +1,37 @@
+<mat-card>
+	<mat-card-header>
+		<mat-card-title>Add Categories</mat-card-title>
+	</mat-card-header>
+	<form 
+		[formGroup]="addCategoryForm"
+		autocomplete="off"
+		novalidate 
+		(ngSubmit)="addCategory(addCategoryForm.value)"
+		fxLayout="column"
+		fxLayoutAlign="center stretch"
+		class="row"
+	>
+		<mat-card-content>
+			<mat-form-field>
+				<input matInput placeholder="Category Name" formControlName="category_name" autocomplete="off">
+			</mat-form-field>
+
+			<mat-form-field>
+				<mat-select placeholder="Category Level" formControlName="category_level" (selectionChange)="onCategoryLevelChanged($event)">
+					<mat-option *ngFor="let level of categoryLevels" [value]="level">
+						{{ level }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+			<mat-form-field *ngIf="parentCategoryRequired">
+				<mat-select placeholder="Parent Category" formControlName="parent_category_id">
+					<mat-option *ngFor="let category of parentCategories" [value]="category.id">
+						{{category.category_name}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</mat-card-content>
+		<button mat-raised-button color="primary" [disabled]="!addCategoryForm.valid">Add Category</button>
+	</form>
+</mat-card>

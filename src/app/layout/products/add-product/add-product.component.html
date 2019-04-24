@@ -1,0 +1,35 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Add Products</mat-card-title>
+  </mat-card-header>
+  <form [formGroup]="addProductForm" autocomplete="off" novalidate (ngSubmit)="addProduct(addProductForm.value)" fxLayout="column wrap"
+  fxLayoutAlign="center center" fxLayoutGap="10px">
+    <mat-card-content>
+      <mat-form-field>
+        <input matInput placeholder="Product Name" formControlName="product_name" autocomplete="off">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Product Price" formControlName="product_price" >
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="number" matInput placeholder="Quantity" formControlName="product_quantity" min="1">
+      </mat-form-field>
+      
+      <mat-form-field>
+        <input type="number" matInput placeholder="Product Lot" formControlName="product_lot" min="1">
+      </mat-form-field>
+      
+      <mat-form-field>
+        <mat-select placeholder="Category" formControlName="category_id">
+          <mat-option *ngFor="let category of categories" [value]="category.id">
+            {{ category.category_name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+    </mat-card-content>
+    <button mat-raised-button color="primary" [disabled]="!addProductForm.valid">Add Product</button>
+  </form>
+</mat-card>
