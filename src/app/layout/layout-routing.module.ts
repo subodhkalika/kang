@@ -32,10 +32,10 @@ const routes: Routes = [
                 path: 'product-assignments',
                 loadChildren: './assignments/assignments.module#AssignmentsModule'
             },
-            { 
-                path: '**',
-                redirectTo: 'dashboard'
-            },
+            // { 
+            //     path: '**',
+            //     redirectTo: 'dashboard'
+            // },
             // {
             //     path: 'charts',
             //     loadChildren: './charts/charts.module#ChartsModule'
