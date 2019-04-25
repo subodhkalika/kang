@@ -38,6 +38,7 @@ export class TopnavComponent implements OnInit {
     }
 
     onLoggedout() {
+        console.log('here');
         this.authenticationService.logout();
         this.router.navigate(['/login']);
     }

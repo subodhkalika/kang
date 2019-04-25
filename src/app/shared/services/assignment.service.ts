@@ -19,6 +19,6 @@ export class AssignmentService {
 	}
 
 	updateAssignments(id, data) {
-		return this.http.put<any>(`${environment.apiUrl}/api/category-update/${id}`, data);
+		return this.http.put<any>(`${environment.apiUrl}/api/assignment-update/${id}`, data);
 	}
 }

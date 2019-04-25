@@ -26,16 +26,26 @@ export class AddCategoryComponent implements OnInit {
 		this.addCategoryForm = new FormGroup({
 			category_name: new FormControl('', [Validators.required, Validators.maxLength(60)]),
 			category_level: new FormControl('', [Validators.required, Validators.maxLength(60)]),
-			parent_category_id: new FormControl('', [Validators.required, Validators.maxLength(60)]),
+			parent_category_id: new FormControl(''),
 		});
+		this.formControlValueChanged();
 
 		this.CategoryService.getMaxCategoryLevel().subscribe(response => {
-			if(response !== null) {
+			if(response.max_level !== null) {
 			  const highestLevelGenerator = response.max_level + 2;
 			  this.categoryLevels = Array.from(Array(highestLevelGenerator).keys());
 			//   this.parentCategoryRequired = this.categoryLevels.length > 1 ? true : false;
 			}
 		});
+	}
+
+	formControlValueChanged() {
+		const parentCategoryControl = this.addCategoryForm.get('parent_category_id');
+		this.addCategoryForm.get('category_level').valueChanges.subscribe(
+			(mode: number) => {
+				(mode > 0) ? parentCategoryControl.setValidators([Validators.required]) : parentCategoryControl.clearValidators(); 
+				parentCategoryControl.updateValueAndValidity();
+			});
 	}
 	
 	onCategoryLevelChanged($event) {
