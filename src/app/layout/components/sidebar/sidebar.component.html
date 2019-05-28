@@ -3,7 +3,8 @@
         <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/dashboard']">
             <mat-icon class="sidenav-icon">dashboard</mat-icon> {{ 'Dashboard' | translate }}
         </a>
-        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/user-accounts']">
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/user-accounts']"
+            *ngIf="['administrator', 'operations'].indexOf(userRole) > -1">
             <mat-icon class="sidenav-icon">face</mat-icon> {{ 'User Accounts' | translate }}
         </a>
         <div class="nested-menu">
@@ -14,7 +15,7 @@
                 <li>
                     <a [routerLinkActive]="'active'" [routerLink]="['/categories']"><span>{{ 'All Categories' | translate }}</span></a>
                 </li>
-                <li>
+                <li *ngIf="userRole == 'administrator'">
                     <a [routerLinkActive]="'active'" [routerLink]="['/categories/add']"><span>{{ 'New Category' | translate }}</span></a>
                 </li>
             </ul>
@@ -27,7 +28,7 @@
                 <li>
                     <a [routerLinkActive]="'active'" [routerLink]="['/products']"><span>{{ 'All Products' | translate }}</span></a>
                 </li>
-                <li>
+                <li *ngIf="userRole == 'administrator'">
                     <a [routerLinkActive]="'active'" [routerLink]="['/products/add']"><span>{{ 'New Product' | translate }}</span></a>
                 </li>
             </ul>
@@ -40,7 +41,7 @@
                 <li>
                     <a [routerLinkActive]="'active'" [routerLink]="['/product-assignments']"><span>{{ 'View All' | translate }}</span></a>
                 </li>
-                <li>
+                <li *ngIf="['administrator', 'operations'].indexOf(userRole) > -1">
                     <a [routerLinkActive]="'active'" [routerLink]="['/product-assignments/assign']"><span>{{ 'Assign Product' | translate }}</span></a>
                 </li>
             </ul>

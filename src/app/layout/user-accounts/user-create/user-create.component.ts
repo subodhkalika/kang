@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '@app/shared/services/user.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { AuthenticationService } from '@app/shared/services/authentication.service';
 
 @Component({
   selector: 'app-user-create',
@@ -33,10 +34,14 @@ export class UserCreateComponent implements OnInit {
 	constructor(
 		private UserService: UserService,
 		private router: Router,
-		private snackBar: MatSnackBar
+		private snackBar: MatSnackBar,
+		private AuthenticationService: AuthenticationService
 	) { }
 	
 	ngOnInit() {
+		if(this.AuthenticationService.currentUserValue.user.role != 'administrator') {
+			this.router.navigateByUrl('/dashboard');
+		}
 		this.addUserForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.maxLength(60)]),
       email: new FormControl('', [Validators.required, Validators.maxLength(60)]),

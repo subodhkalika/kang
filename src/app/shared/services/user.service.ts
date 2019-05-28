@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { MaxCategory } from '@app/_models/category';
-import { ParentCategories } from '@app/_models/category';
-import { Categories } from '@app/_models/category';
 import { User } from '@app/_models/user';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class UserService {
 
-	constructor(private http: HttpClient) { }
+	constructor(
+		private http: HttpClient,
+	) { }
 
 	createUser(data) {
 		return this.http.post<any>(`${environment.apiUrl}/api/signup`, data);
@@ -29,4 +29,5 @@ export class UserService {
 		let user_roles = { roles: ['distribution']};
 		return this.http.get<User>(`${environment.apiUrl}/api/users`, { params: user_roles});
 	}
+
 }

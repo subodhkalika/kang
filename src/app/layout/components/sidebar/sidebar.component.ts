@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '@app/shared/services/authentication.service';
 
 @Component({
     selector: 'app-sidebar',
@@ -7,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
     public showMenu: string;
-    constructor() {}
+    public userRole: string;
+
+    constructor(
+        private AuthenticationService: AuthenticationService
+    ) {}
 
     ngOnInit() {
         this.showMenu = '';
+        this.userRole = this.AuthenticationService.currentUserValue.user.role;
     }
 
     addExpandClass(element: any) {
@@ -20,4 +26,5 @@ export class SidebarComponent implements OnInit {
             this.showMenu = element;
         }
     }
+
 }

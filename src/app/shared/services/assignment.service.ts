@@ -14,8 +14,12 @@ export class AssignmentService {
 		return this.http.post<any>(`${environment.apiUrl}/api/assignment-create`, data);
 	}
 
-	getAllAssignments() {
-		return this.http.get<Assignments>(`${environment.apiUrl}/api/assignments`);
+	getAllAssignments(user) {
+		const data = {
+			user_id: user.id,
+			user_role: user.role
+		}
+		return this.http.get<Assignments>(`${environment.apiUrl}/api/assignments`, {params: data});
 	}
 
 	updateAssignments(id, data) {

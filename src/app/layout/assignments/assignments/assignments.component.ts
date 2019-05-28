@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AssignmentService } from '@app/shared/services/assignment.service';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Categories } from '@app/_models/category';
+import { AuthenticationService } from '@app/shared/services/authentication.service';
 
 @Component({
 	selector: 'app-assignments',
@@ -10,7 +11,7 @@ import { Categories } from '@app/_models/category';
 })
 export class AssignmentsComponent implements OnInit {
 
-	public displayedColumns = ['id', 'distributor_name', 'product', 'quantity', 'unit_price', 'assigned_by', 'created_at'];
+	public displayedColumns = ['id', 'distributor_name', 'product', 'quantity', 'unit_price', 'created_at'];
 	public dataSource = new MatTableDataSource<Categories>();
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
@@ -18,16 +19,23 @@ export class AssignmentsComponent implements OnInit {
 	
 	constructor(
 		private AssignmentService: AssignmentService,
+		private AuthenticationService: AuthenticationService
 	) { }
 
 	ngOnInit() {
-		this.AssignmentService.getAllAssignments().subscribe(
+		const user = this.AuthenticationService.currentUserValue.user;
+		this.AssignmentService.getAllAssignments(user).subscribe(
 			response => this.organizeAssignmentData(response.assignments)
 		);
 	}
 
 	organizeAssignmentData(assignments) {
-		this.dataSource.data = assignments;
+		this.dataSource.data = assignments.map( assignment => {
+			return { 
+				...assignment,
+				product: '#' + assignment.product_id.toString() + ' | ' + assignment.product_name
+			}
+		});
 	}
 
 	applyFilter(filterValue: string) {
